@@ -13,6 +13,6 @@ function App() {
 export default App;
 
 function LikeButton() {
-    const count = 999;
+    const count = 9999;
     return <span>♥ {count}</span>;
 }
