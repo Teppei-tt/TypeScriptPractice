@@ -1,16 +1,12 @@
-import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { GetServerSideProps, NextPage } from "next";
+import { useState } from "react";
 
-const IndexPage: NextPage = () => {
-    const [imageUrl, setImageUrl] = useState("");
+type Props = {
+    initialImageUrl: string;
+};
+const IndexPage: NextPage<Props> = ({ initialImageUrl }) => {
+    const [imageUrl, setImageUrl] = useState(initialImageUrl);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetchImage().then((newImage) => {
-            setImageUrl(newImage.url);
-            setLoading(false);
-        });
-    }, []);
 
     const handleClick = async () => {
         setLoading(true);
@@ -27,6 +23,15 @@ const IndexPage: NextPage = () => {
     );
 };
 export default IndexPage;
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+    const image = await fetchImage();
+    return {
+        props: {
+            initialImageUrl: image.url,
+        },
+    };
+};
 
 type Image = {
     url: string;
