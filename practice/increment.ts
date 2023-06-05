@@ -3,3 +3,8 @@ function increment(num: number) {
 }
 
 console.log(increment(999));
+
+/**
+ * TODO
+ * TypeScritpとJSのl違いについて分かりやすいサンプルをつくる
+ */
